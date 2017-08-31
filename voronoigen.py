@@ -94,6 +94,7 @@ def main(argv):
     # Arguments parsing
     parser = argparse.ArgumentParser(description='Voronoi diagram generator')
     parser.add_argument("-input", "--input-seed-file", default='seed.pickle', type=str, help="input seed pickle file")
+    parser.add_argument("-t", "--iter", default=5, type=int, help="Iteration time for Lloyd’s algorithm")
     parser.add_argument("--enable-preview", action="store_true", help="Enable Voronoi diagram preview")
     parser.add_argument("--preview-filename", default="preview.jpg", type=str, help="Voronoi diagram preview image file")
     args = parser.parse_args()
@@ -105,6 +106,7 @@ def main(argv):
     seedfile = args.input_seed_file
     is_preview = args.enable_preview
     preview_img = args.preview_filename
+    iteration = args.iter
 
     # Load seeds data
     img, points_x, points_y = load_seed(seedfile)
@@ -112,7 +114,7 @@ def main(argv):
     width = img.shape[1]
 
     # Generate voronoi diagram
-    dic = generate_voronoi_diagram(width, height, points_x, points_y, iteration = 1)
+    dic = generate_voronoi_diagram(width, height, points_x, points_y, iteration = iteration)
 
     # Preview voronoi diagram
     if is_preview is True:
