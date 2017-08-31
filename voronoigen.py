@@ -71,7 +71,7 @@ def save_data(img, points_x, points_y, dic, filename = "vordig.pickle"):
         print("Data dumped as file \'%s\'" %filename )
 
 
-def preview_voronoi_diagram(points_x, points_y):
+def preview_voronoi_diagram(points_x, points_y, filename = 'preview.jpg'):
     """Preview Voronoi diagram
 
     Keyword arguments:
@@ -82,7 +82,7 @@ def preview_voronoi_diagram(points_x, points_y):
     vor = Voronoi(points_xy)
     voronoi_plot_2d(vor, show_points = False, show_vertices = False)
     plt.axis('off')
-    plt.savefig('preview.jpg', dpi=800)
+    plt.savefig(filename, dpi=800)
     plt.clf()
 
 def main(argv):
@@ -92,7 +92,19 @@ def main(argv):
     argv -- arguments from terminal
     """
     # Arguments parsing
-    seedfile = 'seed.pickle'
+    parser = argparse.ArgumentParser(description='Voronoi diagram generator')
+    parser.add_argument("-input", "--input-seed-file", default='seed.pickle', type=str, help="input seed pickle file")
+    parser.add_argument("--enable-preview", action="store_true", help="Enable Voronoi diagram preview")
+    parser.add_argument("--preview-filename", default="preview.jpg", type=str, help="Voronoi diagram preview image file")
+    args = parser.parse_args()
+
+    # [DEBUG] Show arguments
+    print(args)
+
+    # Arguments
+    seedfile = args.input_seed_file
+    is_preview = args.enable_preview
+    preview_img = args.preview_filename
 
     # Load seeds data
     img, points_x, points_y = load_seed(seedfile)
@@ -100,10 +112,11 @@ def main(argv):
     width = img.shape[1]
 
     # Generate voronoi diagram
-    dic = generate_voronoi_diagram(width, height, points_x, points_y, iteration = 5)
+    dic = generate_voronoi_diagram(width, height, points_x, points_y, iteration = 1)
 
     # Preview voronoi diagram
-    # preview_voronoi_diagram(points_x, points_y)
+    if is_preview is True:
+        preview_voronoi_diagram(points_x, points_y, preview_img)
 
     # Dump voronoi diagram data
     save_data(img, points_x, points_y, dic)
