@@ -47,6 +47,18 @@ $ python3 voronoigen.py
 $ python3 mosaicplot.py -pc -pme
 ```
 
+### Optimization
+
+If your operation system is Linux, You have a chance to benefit from the
+speedup of parallelism
+
+To acheive that, you need to compile
+some files. A script is given for you to compile conveniently 
+
+```
+sh compile.sh
+```
+
 ## Demo
 
 ![Sample](http://i.imgur.com/PDyl2ax.png)
