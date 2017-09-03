@@ -21,6 +21,7 @@ import matplotlib.pyplot as plt
 import cv2
 from external.progress.bar import FillingSquaresBar
 from scipy.spatial import Voronoi, voronoi_plot_2d
+from cppvoronoi.voronoi import cpp_voronoi_diagram
 
 def generate_voronoi_diagram(width, height, point_x, point_y, iteration = 3):
     """Implement of Lloyd’s algorithm.
@@ -43,10 +44,12 @@ def generate_voronoi_diagram(width, height, point_x, point_y, iteration = 3):
     for i in range(iteration):
         dic = initialize_dic(point_x.size)
         bar.next()
-        voronoi_diagram(width, height, point_x, point_y, dic)
+        # voronoi_diagram(width, height, point_x, point_y, dic)
+        dic = cpp_voronoi_diagram(width, height, point_x, point_y, dic)
         bar.next()
         update_positions(dic, point_x, point_y)
         bar.next()
+
     
     bar.finish()
     return dic

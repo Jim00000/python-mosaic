@@ -7,3 +7,6 @@ __pycache__/
 
 # Pickle files
 *.pickle
+
+# Editor setting
+.vscode/
