@@ -13,6 +13,7 @@ __version__   = "1.0.0"
 
 import argparse
 import sys
+import platform
 import time
 import os.path
 import pickle
@@ -21,7 +22,14 @@ import matplotlib.pyplot as plt
 import cv2
 from external.progress.bar import FillingSquaresBar
 from scipy.spatial import Voronoi, voronoi_plot_2d
-from cppvoronoi.voronoi import cpp_voronoi_diagram
+
+os_name = platform.system()
+optimized = False
+
+# Check whether this program can be optimized
+if os_name == 'Linux' and os.path.exists('cppvoronoi/voronoi.cpp') is True:
+    from cppvoronoi.voronoi import cpp_voronoi_diagram
+    optimized = True
 
 def generate_voronoi_diagram(width, height, point_x, point_y, iteration = 3):
     """Implement of Lloyd’s algorithm.
@@ -39,13 +47,18 @@ def generate_voronoi_diagram(width, height, point_x, point_y, iteration = 3):
     dic -- a dictionary contaning cell points -> pixel data 
     """
 
+    if optimized is True:
+        print('This program will process with openMP supported')
+
     bar = FillingSquaresBar('Processing', max=iteration * 3)
     
     for i in range(iteration):
         dic = initialize_dic(point_x.size)
         bar.next()
-        # voronoi_diagram(width, height, point_x, point_y, dic)
-        dic = cpp_voronoi_diagram(width, height, point_x, point_y, dic)
+        if optimized is False:
+            voronoi_diagram(width, height, point_x, point_y, dic)
+        else:
+            dic = cpp_voronoi_diagram(width, height, point_x, point_y, dic)
         bar.next()
         update_positions(dic, point_x, point_y)
         bar.next()
