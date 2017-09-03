@@ -34,8 +34,8 @@ Voronoi::diagram(
     }
 
     #pragma omp parallel for schedule(dynamic)   
-    for(int y = 0; y < width; y++) {
-        for(int x = 0; x < height; x++) {
+    for(int y = 0; y < height; y++) {
+        for(int x = 0; x < width; x++) {
             
             // Calculate Euclidean distance and find its index
             double min = norm2(width, height);
