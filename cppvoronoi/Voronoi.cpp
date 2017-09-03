@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cmath>
+#include <omp.h>
 #include "Voronoi.h"
 
 using namespace cpp;
@@ -32,6 +33,7 @@ Voronoi::diagram(
         (*dic)[i] = value;
     }
 
+    #pragma omp parallel for schedule(dynamic)   
     for(int y = 0; y < width; y++) {
         for(int x = 0; x < height; x++) {
             
@@ -49,6 +51,7 @@ Voronoi::diagram(
             }
 
             // Push data
+            #pragma omp critical
             if(minarg != -1) {
                 value_t data = (*dic)[minarg];
                 data.push_back(std::make_pair(x, y));
