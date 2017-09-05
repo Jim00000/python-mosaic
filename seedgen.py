@@ -54,6 +54,7 @@ def main(argv):
     parser.add_argument("-ocd", "--output-compsite-dist", type=str, help="output composite image of seeds distribution and input image")
     parser.add_argument("-e", "--error-rate", default=0.5, type=float, help="error rate (default:0.5)")
     parser.add_argument("-ma", "--min-area", default=64, type=int, help="minimal pixels for each block (default:64)")
+    parser.add_argument("-gb", "--gaussian-blur" ,default=False, action="store_true", help="Apply Gaussian blur")
     args = parser.parse_args()
 
     # [DEBUG] Show arguments
@@ -66,6 +67,7 @@ def main(argv):
     output_compsite_dist = args.output_compsite_dist
     error_rate = args.error_rate
     min_area = args.min_area
+    is_gaussian_blur = args.gaussian_blur
 
     # Check the existence of the image file
     if os.path.isfile(imgfile) is False:
@@ -74,6 +76,10 @@ def main(argv):
     # Load image and store as array (convert to RGB)
     img = cv2.imread(imgfile)
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+
+    # Apply gaussian blur
+    if is_gaussian_blur is True:
+        img = cv2.GaussianBlur(img, (5, 5), 0)
 
     # Compute regional quadrature tree
     quad_root = Quad(img, min_area = min_area, error_rate = error_rate, is_root = True)
