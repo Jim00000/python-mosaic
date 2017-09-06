@@ -146,7 +146,7 @@ def centroidal_plot(img, points_x, points_y, dic):
         
     return output_img
 
-def plot_mosaic_edge(img, points_x, points_y, dic, rgb = [0, 0, 0]):
+def plot_mosaic_edge(img, points_x, points_y, dic, rgb = [0, 0, 0], bold_edge = False):
     """Plot edges of every cell
 
     Keyword arguments:
@@ -180,7 +180,18 @@ def plot_mosaic_edge(img, points_x, points_y, dic, rgb = [0, 0, 0]):
         for j in range(data[0].size): 
             x = data[0][j]
             y = data[1][j]
-            is_not_edge = ( (y - 1,x) in pix_dic and  (y,x - 1) in pix_dic and (y + 1,x) in pix_dic and (y,x + 1) in pix_dic )
+            if bold_edge is True:
+                is_not_edge = ( 
+                    (y - 1,x) in pix_dic and  
+                    (y,x - 1) in pix_dic and 
+                    (y + 1,x) in pix_dic and 
+                    (y,x + 1) in pix_dic 
+                    )
+            else:
+                is_not_edge = (
+                    (y + 1,x) in pix_dic and 
+                    (y,x + 1) in pix_dic 
+                    )
 
             # Check edge    
             if is_not_edge is False:
@@ -201,8 +212,10 @@ def main(argv):
     group = parser.add_mutually_exclusive_group()
     group.add_argument("-pc", "--plot-centroidal", default=False, action="store_true", help="Use centroidal point as the color of the cell")
     group.add_argument("-pa", "--plot-average", default=False, action="store_true", help="Use average color of the cell as the color of all pixels inside the cell")
-    parser.add_argument("-pme", "--plot-mosaic-edge", default=False, action="store_true", help="Plot edge for all cells")
-    parser.add_argument("-rgb", type=int, nargs=3, default=[0, 0, 0],help="rgb for edge (default : [0, 0, 0])")
+    group = parser.add_argument_group(title='mosaic edge options')
+    group.add_argument("-pme", "--plot-mosaic-edge", default=False, action="store_true", help="Plot edge for all cells")
+    group.add_argument("--bold-edge", default=False, action="store_true", help="plot edge with bold line style")
+    group.add_argument("-rgb", type=int, nargs=3, default=[0, 0, 0],help="rgb for edge (default : [0, 0, 0])")
     args = parser.parse_args()
 
     # [DEBUG] Show arguments
@@ -214,6 +227,7 @@ def main(argv):
     is_average_plot = args.plot_average
     is_centroidal_plot = args.plot_centroidal
     is_plot_mosaic_edge = args.plot_mosaic_edge
+    is_bold_edge = args.bold_edge
     rgb = args.rgb
 
     # If no one plot method is selected
@@ -237,7 +251,7 @@ def main(argv):
 
     # Plot mosaic edge
     if is_plot_mosaic_edge is True:
-        img = plot_mosaic_edge(img, points_x, points_y, dic, rgb = rgb)
+        img = plot_mosaic_edge(img, points_x, points_y, dic, rgb = rgb, bold_edge = is_bold_edge)
 
     # Output image
     save_img(img, filename = output_filename)
