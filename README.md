@@ -14,7 +14,14 @@ And install necessary libraries
 $ pip3 install --user -r requirements.txt
 ```
 
+If you wanna use GUI then make sure qt5
+libraries has been installed
+
 ## Usage
+
+You can use command-line or gui to use thess programs. command-line way is suggested because of more arguments offered to tune
+
+### Use command-line
 
 First step, generate seeds from raw image
 
@@ -39,13 +46,24 @@ on
 $ python3 mosaicplot.py -input <vor-dig-file> [ -pa | -pc ] [ -pme ] -o <output-file>
 ```
 
-### Example
+#### Example
 
 ```
 $ python3 seedgen.py sample.jpg
 $ python3 voronoigen.py
 $ python3 mosaicplot.py -pc -pme
 ```
+
+### Use GUI
+
+This project supports GUI by Qt5. Make sure that you have Qt5 libraries installed
+before using 
+
+```
+$ python3 gui-qt5.py
+```
+
+to open GUI
 
 ### Optimization
 
@@ -61,8 +79,8 @@ sh compile.sh
 
 ## Demo
 
-![Sample](http://i.imgur.com/PDyl2ax.png)
-![Output](http://i.imgur.com/HrLEpin.png)
+![Lenna.png](demo/Lenna.png)
+![Lenna-mosaic.png](demo/Lenna-mosaic.png)
 
 ## Reference
 
