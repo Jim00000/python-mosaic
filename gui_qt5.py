@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 '''
-    File name: gui_main.py
+    File name: gui_qt5.py
     Author   : Jim00000 <good0121good@gmail.com>
 '''
 
