@@ -3,3 +3,4 @@ scipy
 cython
 matplotlib
 opencv-python
+pyqt5
