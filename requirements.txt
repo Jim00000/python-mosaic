@@ -4,3 +4,4 @@ cython
 matplotlib
 opencv-python
 pyqt5
+pyinstaller
