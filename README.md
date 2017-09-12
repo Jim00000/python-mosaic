@@ -80,7 +80,7 @@ sh compile.sh
 ## Demo
 
 ![Lenna.png](demo/Lenna.png)
-![Lenna-mosaic.png](demo/Lenna-mosaic.png)
+![Lenna-mosaic.png](demo/Lenna-mosaic.jpg)
 
 ## Reference
 
