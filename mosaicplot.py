@@ -65,8 +65,10 @@ def main(argv):
     group.add_argument("-pa", "--plot-average", default=False, action="store_true", help="Use average color of the cell as the color of all pixels inside the cell")
     group = parser.add_argument_group(title='mosaic edge options')
     group.add_argument("-pme", "--plot-mosaic-edge", default=False, action="store_true", help="Plot edge for all cells")
-    group.add_argument("--bold-edge", default=False, action="store_true", help="plot edge with bold line style")
-    group.add_argument("-rgb", type=int, nargs=3, default=[0, 0, 0],help="rgb for edge (default : [0, 0, 0])")
+    group.add_argument("--bold-edge", default=False, action="store_true", help="Plot edge with bold line style")
+    group.add_argument("-rgb", type=int, nargs=3, default=[0, 0, 0], help="Set rgb for edge (default : [0, 0, 0])")
+    group.add_argument("--enable-gamma-correction", default=False, action="store_true", help="Enable gamma correction to adjust image")
+    group.add_argument("-gamma", type=float, default=1.0, help="Set gamma value (default : 1.0)")
     args = parser.parse_args()
 
     # [DEBUG] Show arguments
@@ -79,6 +81,8 @@ def main(argv):
     is_centroidal_plot = args.plot_centroidal
     is_plot_mosaic_edge = args.plot_mosaic_edge
     is_bold_edge = args.bold_edge
+    is_enable_gamma_correction = args.enable_gamma_correction
+    gamma = args.gamma
     rgb = args.rgb
 
     # If no one plot method is selected
@@ -91,7 +95,8 @@ def main(argv):
     img, points_x, points_y, dic = load_vordig(vor_dig_data)
 
     # Gamma adjustment
-    # img = adjust_gamma(img, 1.0)
+    if is_enable_gamma_correction is True:
+        img = adjust_gamma(img, gamma)
 
     # Plot pixel
     if is_average_plot is True:
