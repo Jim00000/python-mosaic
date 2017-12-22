@@ -21,7 +21,7 @@ libraries has been installed
 
 You can use command-line or gui to use thess programs. command-line way is suggested because of more arguments offered to tune
 
-### Use command-line
+### Use CLI
 
 First step, generate seeds from raw image
 
@@ -57,7 +57,6 @@ $ python3 mosaicplot.py -pc -pme
 ### Use GUI
 
 This project supports GUI by Qt5. Make sure that you have Qt5 libraries installed
-before using 
 
 ```
 $ python3 gui-qt5.py
@@ -65,7 +64,7 @@ $ python3 gui-qt5.py
 
 to open GUI
 
-### Optimization
+### Speedup with parallelism
 
 If your operation system is Linux, You have a chance to benefit from the
 speedup of parallelism
