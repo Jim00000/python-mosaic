@@ -81,6 +81,8 @@ sh compile.sh
 ![Lenna.png](demo/Lenna.png)
 ![Lenna-mosaic.png](demo/Lenna-mosaic.jpg)
 
+`$ python3 mosaic.py Lenna.png --error-rate 0.25 --min-area 32 -t 20 -pme -rgb 200 200 200`
+
 ## Reference
 
 - [Simple Adaptive Mosaic Effects](http://ieeexplore.ieee.org/document/1599119/)
