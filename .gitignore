@@ -1,10 +1,6 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
 
-# JPEG / PNG files
-*.jpg 
-*.png
-
 # Pickle files
 *.pickle
 
