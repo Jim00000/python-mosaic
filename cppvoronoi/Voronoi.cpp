@@ -28,9 +28,7 @@ Voronoi::diagram(
     int sz = point_x.size();
 
     for(int i = 0; i < sz; i++) {
-        value_t value{};
-        value.push_back(std::make_pair(-1,-1));
-        (*dic)[i] = value;
+        ((*dic)[i]).push_back(std::make_pair(-1,-1));
     }
 
     #pragma omp parallel for schedule(dynamic)   
@@ -53,9 +51,7 @@ Voronoi::diagram(
             // Push data
             #pragma omp critical
             if(minarg != -1) {
-                value_t data = (*dic)[minarg];
-                data.push_back(std::make_pair(x, y));
-                (*dic)[minarg] = data;
+                ((*dic)[minarg]).push_back(std::make_pair(x, y));
             }
 
         }

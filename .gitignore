@@ -10,3 +10,9 @@ __pycache__/
 # compiled C++ files and libraries
 voronoi.cpp
 cppvoronoi/*.so
+
+# pyInstaller
+dist/
+
+# qt5-file
+gui_qt5
