@@ -79,9 +79,26 @@ sh compile.sh
 ## Demo
 
 ![Lenna.png](demo/Lenna.png)
-![Lenna-mosaic.png](demo/Lenna-mosaic.jpg)
+
+![output_8_dot25.jpg](demo/output_8_dot25.jpg)
+
+`$ python3 mosaic.py Lenna.png --error-rate 0.25 --min-area 8 -t 20 -pme -rgb 200 200 200`
+
+![output_32_dot25.jpg](demo/output_32_dot25.jpg)
 
 `$ python3 mosaic.py Lenna.png --error-rate 0.25 --min-area 32 -t 20 -pme -rgb 200 200 200`
+
+![output_64_dot25.jpg](demo/output_64_dot25.jpg)
+
+`$ python3 mosaic.py Lenna.png --error-rate 0.25 --min-area 64 -t 20 -pme -rgb 200 200 200`
+
+![output_256_dot25.jpg](demo/output_256_dot25.jpg)
+
+`$ python3 mosaic.py Lenna.png --error-rate 0.25 --min-area 256 -t 20 -pme -rgb 200 200 200`
+
+![output_1024_dot25.jpg](demo/output_1024_dot25.jpg)
+
+`$ python3 mosaic.py Lenna.png --error-rate 0.25 --min-area 1024 -t 20 -pme -rgb 200 200 200`
 
 ## Reference
 
