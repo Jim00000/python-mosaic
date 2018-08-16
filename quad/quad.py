@@ -88,13 +88,10 @@ class Quad:
     
     def is_leaf(self):
         """Check whether this node is a leaf """
-        if self.height * self.width < self.min_area :
+        if self.height * self.width <= self.min_area or __error__(self.img) <= self.error_rate:
             return True
         else:
-            if __error__(self.img) <= self.error_rate:
-                return True
-            else:
-                return False
+            return False
 
     def generate_seeds(self):
         """Generate seeds """
